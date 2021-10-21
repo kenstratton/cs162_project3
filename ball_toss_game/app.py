@@ -19,37 +19,37 @@ TIME = 10
 
 
 class Ball(tk.Button):
-    def __init__(self, root, num):
+    def __init__(self, root):
         super().__init__(
-            root, text = 'ball', width=1, height=2, font=("",10)
+            root, text = 'ball', width = 1, height = 2, font=("", 10)
         )
         self.mouse_xy = None  # coordinates of a cursor
         self.xy = None        # coordinates of a ball
         self.ball_place()
 
         # Event handlers for clicking, moving, and releasing a ball
-        self.bind("<Button-1>",self.ball_click)
-        self.bind("<B1-Motion>",self.ball_move)
-        self.bind("<ButtonRelease-1>",self.ball_stop)
+        self.bind("<Button-1>", self.ball_click)
+        self.bind("<B1-Motion>", self.ball_move)
+        self.bind("<ButtonRelease-1>", self.ball_stop)
 
     # Randomly locate the first position of a ball in a canvas field without overlapping a basket
     def ball_place(self):
-        num = r.randint(0,1)
-        num2 = r.randint(2,3)
+        num = r.randint(0, 1)
+        num2 = r.randint(2, 3)
         if num == 0:
-            x = r.randint(10, CANVAS_W-40)
+            x = r.randint(10, CANVAS_W - 40)
             if num2 == 2:
-                y = r.randint(10, BASKET_Y-40)
+                y = r.randint(10, BASKET_Y - 40)
             else:
-                y = r.randint(BASKET_Y+BASKET_W, CANVAS_H-40)
+                y = r.randint(BASKET_Y + BASKET_W, CANVAS_H - 40)
         else:
             if num2 == 2:
-                x = r.randint(10, BASKET_X-40)
+                x = r.randint(10, BASKET_X - 40)
             else:
-                x = r.randint(BASKET_X+BASKET_W, CANVAS_W-40)
+                x = r.randint(BASKET_X + BASKET_W, CANVAS_W - 40)
             y = r.randint(10, CANVAS_H-40)
         self.place(x = x, y = y)
-    
+
     # Detect cordinates of a ball and a cursor
     def ball_click(self, evnt):
         self.mouse_xy = (evnt.x_root, evnt.y_root)
@@ -57,6 +57,7 @@ class Ball(tk.Button):
         ball_x = int(place_info['x'])
         ball_y = int(place_info['y'])
         self.xy = (ball_x, ball_y)
+        print(self.xy)
 
     def ball_move(self, evnt):
         # Distance between coordinates of a mouse after moved and those at origin
@@ -82,12 +83,12 @@ class Ball(tk.Button):
         place_info = evnt.widget.place_info()
         ball_x = int(place_info["x"])
         ball_y = int(place_info["y"])
-        
+
         # Whether a ball is outside canvas?
         if ((ball_x < 0)
         or (ball_y < 0)
-        or (CANVAS_W < ball_x+BALL_W)
-        or (CANVAS_H < ball_y+BALL_W)):
+        or (CANVAS_W < ball_x + BALL_W)
+        or (CANVAS_H < ball_y + BALL_W)):
             self.ball_place()
 
         # Whether a ball is in a basket?
@@ -101,7 +102,7 @@ class Ball(tk.Button):
 
 class CanvasField(tk.Canvas):
     def __init__(self, root):
-        # Set up a canvas 
+        # Set up a canvas
         super().__init__(
             root, width=CANVAS_W, height=CANVAS_H, bg="black"
         )
@@ -115,8 +116,8 @@ class CanvasField(tk.Canvas):
         )
 
         # "Basket" at the center
-        lbl_basket = tk.Label(root, font = ("System", 16), text = "Basket", foreground='White', background='Red')
-        lbl_basket.place(x = BASKET_X+(BASKET_W/2-27), y = BASKET_Y+(BASKET_W/2-11))
+        self.lbl_basket = tk.Label(root, font = ("System", 16), text = "Basket", foreground='White', background='Red')
+        self.lbl_basket.place(x = BASKET_X+(BASKET_W/2-27), y = BASKET_Y+(BASKET_W/2-11))
 
 
 class ScoreBoard():
@@ -126,7 +127,7 @@ class ScoreBoard():
         self.score.place(x = BOARD_X, y = WINDOW_H/4)
         self.timer = tk.Label(root, font = ("System", 16), text = f"Time : {TIME}s")
         self.timer.place(x = BOARD_X, y = WINDOW_H/3)
-        
+
         # ButtonRelease-1 = left click
         root.bind("<ButtonRelease-1>", self.update_score)
 
@@ -154,14 +155,15 @@ class BallTossGame():
 
     # Create a ball instance
     def ball_create(self):
-        for num in range(1,6):
-            ball = Ball(self.root, num)
+        for i in range(5):
+            ball = Ball(self.root)
             self.balls.append(ball)
 
     # Delete all ball instances
     def ball_destroy(self):
         for ball in self.balls:
             ball.destroy()
+        self.balls.clear()
 
     # Start a timer
     def timer_start(self):
@@ -181,10 +183,10 @@ class GameHandler():
     def __init__(self, root, game):
         self.root = root
         self.game = game
-        
+
         # Start button
         self.btn = tk.Button(root, text='START', command = self.game_start)
-        self.btn.place(x= BOARD_X, y=WINDOW_H/8)
+        self.btn.place(x = BOARD_X, y = WINDOW_H/8)
 
     # Start a game after clicking a start button
     def game_start(self):
@@ -210,14 +212,14 @@ class GameHandler():
 class Application(tk.Tk):
     def __init__(self):
         super().__init__()
-
         # Application window
         self.geometry(f"{WINDOW_W}x{WINDOW_H}")
         self.title("Ball-toss game")
+        self.create_game()
 
-        # Create game objects
-        game = BallTossGame(self)
-        GameHandler(self, game)
+    # Create game objects
+    def create_game(self):
+        GameHandler(self, BallTossGame(self))
 
 
 def main():
