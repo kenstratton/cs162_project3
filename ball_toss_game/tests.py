@@ -1,5 +1,5 @@
 # Tests for the classes of the project-3 appllication
-from ball_toss_beta import *
+from app import *
 import pytest
 
 
