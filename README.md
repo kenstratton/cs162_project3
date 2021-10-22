@@ -1,6 +1,6 @@
 # CS162 Project3 - BAll TOSS GAME
 
-- [Overview](https://github.com/kenstratton/cs162_project3/blob/main/README.md#-overview)
+- [Overview](https://github.com/kenstratton/cs162_project3#-overview)
 - [Tools](https://github.com/kenstratton/cs162_project3#-tools)  
 - [GUI](https://github.com/kenstratton/cs162_project3#-gui)  
 - [Principal Objects](https://github.com/kenstratton/cs162_project3#-principal-objects)  
