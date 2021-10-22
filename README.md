@@ -264,18 +264,7 @@ Also, in accordance with the landing point, the **ball_evaluate** method examine
 
 ## ▼ Tests
 Some tests have been set up for checking initial properties for instances from each class and thier methods.  
-In tetsting methtodology, pytest helps test above things using **assert** statement that evaluates validity of conditional statements.
+In tetsting methodology, pytest helps test above things using **assert** statement that evaluates validity of conditional statements.
 
 ## ▼ Contribution
 Contributions on this project were all by myself due to unfotutnately failing to make a group in Discord 😿
-
-
-
-
-
-
-
-
-
-
-
