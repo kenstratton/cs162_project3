@@ -1,5 +1,15 @@
 # CS162 Project3 - BAll TOSS GAME
+
+- [Overview](https://github.com/kenstratton/cs162_project3/blob/main/README.md#-overview)
+- [Tools](https://github.com/kenstratton/cs162_project3#-tools)  
+- [GUI](https://github.com/kenstratton/cs162_project3#-gui)  
+- [Principal Objects](https://github.com/kenstratton/cs162_project3#-principal-objects)  
+- [Tests](https://github.com/kenstratton/cs162_project3#-tests)  
+- [Contribution](https://github.com/kenstratton/cs162_project3#-contribution)
+
+## ▼ Overview
 Super simple game where a player can get points by dragging balls onto a basket in limited time.
+
 ## ▼ Tools
     Python 3.7.3
     Tkinter 8.6
