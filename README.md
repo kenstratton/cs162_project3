@@ -8,7 +8,7 @@ Super simple game where a player can get points by dragging balls onto a basket 
 ## ▼ GUI
 GUI library Tikinter has various widgets to display GUI, and this time I used the following:  
 - **Button**  
-Forming the ball objects and a start button.
+Forming the ball objects and the start button.
 
 - **Label**  
 Writing the score board on the right and the text of "Basket" at the center.
@@ -16,12 +16,12 @@ Writing the score board on the right and the text of "Basket" at the center.
 - **Canvas**  
 Drawing the game field and the oval design of a basket.
 
-<img width="552" alt="screenshot ball-toss-game" src="https://user-images.githubusercontent.com/77530003/138505718-349bd81b-e6f4-4c89-bd61-7fcfb166fbe6.png">
+<img width="552" alt="screenshot ball-toss-game" src="https://user-images.githubusercontent.com/77530003/138508026-a466d5f5-fc5c-47fb-b6cf-f122fca27aac.png">
 
 ## ▼ Principal Objects
-The application has six classes that are interactive with each other to assure its functionality as game.
+The application has the six classes that are interactive with each other to assure its functionality as game.
 ### Application Class :
-Top hierarchy class to create the GUI window and objects of a game and a game handler.
+Top-hierarchy class to create the GUI window and instance objects of game and game handler.
 
     class Application(tk.Tk):
     def __init__(self):
@@ -37,7 +37,7 @@ Top hierarchy class to create the GUI window and objects of a game and a game ha
 
 ### GameHandler Class :
 Controls the game flow such as ...  
-・providing a start button for user to start a game   
+・providing a start button for a player to start a game   
 ・handling processes as a game starts  
 ・handling processes as a game ends  
 ・manipulating the state of a start button  
@@ -75,12 +75,12 @@ Controls the game flow such as ...
 Supplies componential sources for game such as ...  
 ・score board that shows the total score and remainding time  
 ・game field where a user can have effects on game  
-・balls which are actually manipulated by a user  
+・balls which are actually manipulated by a player   
 Methods such as ...  
 ・creating balls  
 ・deleting balls  
 ・starting a timer  
-・reseting a score board, a field, and balls (this trigers deleting balls)
+・reseting a score board, field, and balls (this trigers deleting balls)
 
     class BallTossGame():
     # global TIME
@@ -116,8 +116,8 @@ Methods such as ...
         self.ball_destroy()
 
 ### ScoreBoard Class :
-Where a user check the total score and remaining time.  
-Has methods to update the above things as time elapses.
+Where a player checks the total score and remaining time.  
+Has the methods to update the above things as time elapses.
 
     class ScoreBoard():
     def __init__(self, root):
@@ -144,7 +144,7 @@ Has methods to update the above things as time elapses.
         self.root.after(1000, self.update_time)
 
 ### CanvasField Class :
-Provides a area where a user plays a game.
+Provides an area where a user plays a game.
 At the center of the area, a basket is drawn.
 
     class CanvasField(tk.Canvas):
@@ -169,7 +169,7 @@ At the center of the area, a basket is drawn.
 ### Ball Class :
 Generates an instance which a player, except a start button, actually handles during a game.
 This has three object-locating methods trigerred to process when clicking, dragging, and releasing occur, and each bases on the object's begining spot and distance between end and start points of a cursor in order to calculate its landing point.  
-Also, in accordance with the landing point, the **ball_evaluate** method examines whether the ball is dropped out of the field, or into the basket leading to addition of score.
+Also, in accordance with the landing point, the **ball_evaluate** method examines whether the dropped ball is out of the field, or onto the basket leading to addition of a score.
 
     class Ball(tk.Button):
     def __init__(self, root):
@@ -253,7 +253,7 @@ Also, in accordance with the landing point, the **ball_evaluate** method examine
             GAME_POINT += 1
 
 ## ▼ Tests
-Some tests have been set for checking initial properties for instances from each class and thier methods.  
+Some tests have been set up for checking initial properties for instances from each class and thier methods.  
 In tetsting methtodology, pytest helps test above things using **assert** statement that evaluates validity of conditional statements.
 
 ## ▼ Contribution
